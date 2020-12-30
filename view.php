@@ -48,26 +48,29 @@ a:hover { color: #ddd; }
     </div>
   <div class="row zoomwall" id="zoomwall" >
 <?php
+require_once('LoadFiles.class.php');
+$loadFilesClass = new LoadFiles;
+
 if(isset($_GET['folder'])){
-   
-    $dir = 'C:\Users\George\Downloads\xxx\\'.rawurldecode($_GET['folder']);
-    $files = scandir($dir, 0);
-    usort($files, 'strnatcasecmp');
-    for($i = 2; $i < count($files); $i++){
-        if($files[$i]  == "." || $files[$i]  == "..") {
-            continue;
-        }
-        $file = $dir.'\\'.$files[$i];
-        if (!file_exists( $file)) { 
-            continue;
-        }  
-        $pict = '/xxx/'.rawurldecode($_GET['folder']).'/'.$files[$i];  
-        $pict = str_replace('%','%25',$pict);
-        $pict = str_replace('#','%23',$pict);
-        echo '<img class="col" src="'.$pict.'"  data-highres="'.$pict.'" width="250" alt="Smiley face" >';
+    $loadFilesClass->scanDirectory(null, $_GET['folder']);
+    // $dir = 'C:\Users\George\Downloads\xxx\\'.rawurldecode($_GET['folder']);
+    // $files = scandir($dir, 0);
+    // usort($files, 'strnatcasecmp');
+    // for($i = 2; $i < count($files); $i++){
+    //     if($files[$i]  == "." || $files[$i]  == "..") {
+    //         continue;
+    //     }
+    //     $file = $dir.'\\'.$files[$i];
+    //     if (!file_exists( $file)) { 
+    //         continue;
+    //     }  
+    //     $pict = '/xxx/'.rawurldecode($_GET['folder']).'/'.$files[$i];  
+    //     $pict = str_replace('%','%25',$pict);
+    //     $pict = str_replace('#','%23',$pict);
+    //     echo '<img class="col" src="'.$pict.'"  data-highres="'.$pict.'" width="250" alt="Smiley face" >';
       
 
-    }
+    // }
 }
 ?>
 </div>

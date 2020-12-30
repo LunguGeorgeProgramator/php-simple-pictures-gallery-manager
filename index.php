@@ -7,11 +7,11 @@
 require_once('LoadFiles.class.php');
 ?>
 
-<form action="/gallery/index.php" method="get">
+<form action="/php-simple-pictures-gallery-manager/index.php" method="get">
 Search: <input type="text" name="search"><br>
 <input type="submit">
 </form>
-<a href="/gallery">Reset</a>
+<a href="/php-simple-pictures-gallery-manager">Reset</a>
 <div class="container">
   <div class="row">
 
@@ -19,9 +19,9 @@ Search: <input type="text" name="search"><br>
 
 <?php
 $loadFilesClass = new LoadFiles;
-$dir = 'C:\Users\George\Downloads\xxx';
-$files = scandir($dir, 0);
-usort($files, 'strnatcasecmp');
+// $dir = 'C:\Users\George\Downloads\xxx';
+// $files = scandir($dir, 0);
+// usort($files, 'strnatcasecmp');
 
 if(isset($_GET['search'])){
     $loadFilesClass->scanDirectory($_GET['search']);
