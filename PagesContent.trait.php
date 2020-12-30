@@ -42,14 +42,18 @@ trait PagesContent {
         return $html;
     }
 
-    function paginantionPage(){
+    function paginantionPage($folder = null){
         $html = '<div class="container">';
         $html .= '<div class="row">';
-        $html .= '<div class="col"><a href="/'.Globals::POJECT_DIR.'?search='.($this->search ?? '').'&last_page='.$this->pagination->getPrev().'">< prev</a></div>';
-        $html .= '<div class="col"><a href="/'.Globals::POJECT_DIR.'?search='.($this->search ?? '').'&last_page='.$this->pagination->getNext().'"> next ></a></div>';
+        $html .= '<div class="col"><a href="'.$this->setPaginationUrl().$this->pagination->getPrev().'">< prev</a></div>';
+        $html .= '<div class="col"><a href="'.$this->setPaginationUrl().$this->pagination->getNext().'"> next ></a></div>';
         $html .= '</div>';
         $html .= '</div>';
         return $html;
+    }
+
+    function setPaginationUrl() {
+        return '/'.Globals::POJECT_DIR.($this->folder_path ? $this->folder_path : '?search='.($this->search ?? '')).'&last_page=';
     }
 
     function replaceString($str){

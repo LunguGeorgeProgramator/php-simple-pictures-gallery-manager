@@ -9,20 +9,22 @@ class LoadFiles {
 
     public $directory_name;
 
-    function __construct($directory_name = null, $search = null, $last_in_page = null) {
+    function __construct($directory_name = null, $folder = null, $search = null, $last_in_page = null, $folder_path = null) {
         $this->directory_name = $directory_name;
         $this->search = $search;
+        $this->folder = $folder;
+        $this->folder_path = $folder_path;
         $this->pagination = new Pagination($last_in_page);
     }
 
-    function setDirectory($folder = null){
+    function setDirectory(){
         $this->directory_name = $this->directory_name ?? Globals::DEFAULT_DIRECTORY;
-        return $this->directory_name . ($folder ? '\\'. rawurldecode($folder) : '');
+        return $this->directory_name . ($this->folder ? '\\'. rawurldecode($this->folder) : '');
     }
 
-    function scanDirectoryForFiles($folder = null){
-        $directory_name = $this->setDirectory($folder);
-        $files = array_diff(scandir($directory_name), array(".", ".."));
+    function scanDirectoryForFiles(){
+        $directory_name = $this->setDirectory($this->folder);
+        $files = array_diff(scandir($directory_name . '/'), array(".", ".."));
         echo count($files);
         usort($files, 'strnatcasecmp');
         return $files;
@@ -45,20 +47,20 @@ class LoadFiles {
         return true;
     }
 
-    function loadGallery($folder = null){
+    function loadGallery(){
         $html = '';
-        $files = $this->scanDirectoryForFiles($folder);
-        $last_on_page = $this->pagination->setMaxPagination(count($files), $folder, $this->search);
-        $start_on_page = $this->pagination->setMinPagination($folder, $this->search);
+        $files = $this->scanDirectoryForFiles($this->folder);
+        $last_on_page = $this->pagination->setMaxPagination(count($files), $this->search);
+        $start_on_page = $this->pagination->setMinPagination($this->search);
         for($i = $start_on_page; $i < $last_on_page; $i++){
             if($this->search !== null && $this->searchInDirectory($this->search, $files, $i) === false){
                 continue;
             }
-            $new_dir = $this->setDirectory($folder).'\\'.$files[$i];
-            if($folder === null) {
+            $new_dir = $this->setDirectory($this->folder).'\\'.$files[$i];
+            if($this->folder === null) {
                 $content_page = $this->mainIndexPage($new_dir, $files, $i);
             }else {
-                $content_page = $this->viewPage($new_dir, $files, $i, $folder);
+                $content_page = $this->viewPage($new_dir, $files, $i, $this->folder);
             }
             if(empty($content_page)){
                 continue;

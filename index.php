@@ -10,7 +10,7 @@ Search: <input type="text" name="search"><br>
 </form>
 <a href="/<?php echo Globals::POJECT_DIR; ?>">Reset</a>
 <?php
-$loadFilesClass = new LoadFiles(null, $_GET['search'] ?? null, $_GET['last_page'] ?? null);
+$loadFilesClass = new LoadFiles(null, null, $_GET['search'] ?? null, $_GET['last_page'] ?? null, null);
 echo $loadFilesClass->paginantionPage();
  ?>
 <div class="container">

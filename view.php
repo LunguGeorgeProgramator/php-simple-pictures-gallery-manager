@@ -8,8 +8,9 @@
 	};
 </script>
 <?php
-require_once('globals.class.php');
 require_once('LoadFiles.class.php');
+$loadFilesClass = new LoadFiles(null, $_GET['folder'] ?? null, null, $_GET['last_page'] ?? null, '/view.php?folder='.$_GET['folder']);
+echo $loadFilesClass->paginantionPage();
 ?>
 <div class="container">
     <div clss="row">
@@ -17,11 +18,9 @@ require_once('LoadFiles.class.php');
       <i style=" color: blue;"><?php echo rawurldecode( $_GET['folder'] ); ?> </i>
     </div>
   <div class="row zoomwall" id="zoomwall" >
-<?php
-$loadFilesClass = new LoadFiles;
-echo $loadFilesClass->loadGallery($_GET['folder']);
-?>
+<?php echo $loadFilesClass->loadGallery(); ?>
 </div>
+<?php echo $loadFilesClass->paginantionPage(); ?>
 <div clss="row">
 <a href="/<?php echo Globals::POJECT_DIR; ?>">Back</a>
 <?php print rawurldecode($_GET['folder']); ?>

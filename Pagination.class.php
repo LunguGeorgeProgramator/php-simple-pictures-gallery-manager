@@ -33,12 +33,12 @@ class Pagination {
         return $this->last_page;
     }
 
-    function setMaxPagination($max, $folder, $search) : int {
-        return $folder || $search ? $max : ($this->getLastPage() >= $max ? $max : $this->getLastPage());
+    function setMaxPagination($max, $search) : int {
+        return $search ? $max : ($this->getLastPage() >= $max ? $max : $this->getLastPage());
     }
 
-    function setMinPagination($folder, $search) : int {
-        return $folder || $search ?  0 : $this->getPrev();
+    function setMinPagination($search) : int {
+        return $search ?  0 : $this->getPrev();
     }
 
 }
