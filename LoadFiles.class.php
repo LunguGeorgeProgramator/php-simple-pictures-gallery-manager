@@ -23,6 +23,7 @@ class LoadFiles {
     function scanDirectoryForFiles($folder = null){
         $directory_name = $this->setDirectory($folder);
         $files = array_diff(scandir($directory_name), array(".", ".."));
+        echo count($files);
         usort($files, 'strnatcasecmp');
         return $files;
     }
@@ -46,12 +47,11 @@ class LoadFiles {
 
     function loadGallery($folder = null){
         $html = '';
-        $search = $this->search;
         $files = $this->scanDirectoryForFiles($folder);
-        $last_on_page = $this->pagination->setMaxPagination($files, $folder, $search);
-        $start_on_page = $this->pagination->setMinPagination($folder, $search);
+        $last_on_page = $this->pagination->setMaxPagination(count($files), $folder, $this->search);
+        $start_on_page = $this->pagination->setMinPagination($folder, $this->search);
         for($i = $start_on_page; $i < $last_on_page; $i++){
-            if($search !== null && $this->searchInDirectory($search, $files, $i) === false){
+            if($this->search !== null && $this->searchInDirectory($this->search, $files, $i) === false){
                 continue;
             }
             $new_dir = $this->setDirectory($folder).'\\'.$files[$i];
