@@ -15,9 +15,7 @@ Search: <input type="text" name="search"><br>
 <?php
 $dir = 'C:\Users\George\Downloads\xxx';
 $files = scandir($dir, 0);
-// sort($files);
 usort($files, 'strnatcasecmp');
-// var_dump($files);
 
 if(isset($_GET['search'])){
     echo urldecode($_GET['search']);
@@ -52,9 +50,7 @@ if(isset($_GET['search'])){
                 if (file_exists( $new_dir.'\\'.$filesNew[2])) {
                     echo '<div class="col">';
                     
-                    // echo $filesNew[2]."<br>";
                     $filename = $new_dir.'\\'.$filesNew[2]; 
-                    // $pict = 'file:///C:/Users/George/Downloads/xxx/'.$files[$i].'/'.$filesNew[2];
                     $pict = '/xxx/'.$files[$i].'/'.$filesNew[2];
                     $pict = str_replace('%','%25',$pict);
                     $pict = str_replace('#','%23',$pict);
@@ -64,7 +60,6 @@ if(isset($_GET['search'])){
                     print "<b style='height: 100px; overflow: hidden;'>".$files[$i]."</b>";
                     echo '</div>';
                 } else {
-                    // echo 'nope';
                     continue;
                 }
                 
@@ -95,9 +90,7 @@ if(isset($_GET['search'])){
                 if (file_exists( $new_dir.'\\'.$filesNew[2])) {
                     echo '<div class="col">';
                     
-                    // echo $filesNew[2]."<br>";
                     $filename = $new_dir.'\\'.$filesNew[2]; 
-                    // $pict = 'file:///C:/Users/George/Downloads/xxx/'.$files[$i].'/'.$filesNew[2];
                     $pict = '/xxx/'.$files[$i].'/'.$filesNew[2];
                     $pict = str_replace('%','%25',$pict);
                     $pict = str_replace('#','%23',$pict);
@@ -106,7 +99,6 @@ if(isset($_GET['search'])){
                     print "<b style='height: 100px; overflow: hidden;'>".$files[$i]."</b>";
                     echo '</div>';
                 } else {
-                    // echo 'nope';
                     continue;
                 }
                 

@@ -52,16 +52,12 @@ if(isset($_GET['folder'])){
    
     $dir = 'C:\Users\George\Downloads\xxx\\'.rawurldecode($_GET['folder']);
     $files = scandir($dir, 0);
-    // sort($files);
     usort($files, 'strnatcasecmp');
     for($i = 2; $i < count($files); $i++){
         if($files[$i]  == "." || $files[$i]  == "..") {
             continue;
         }
         $file = $dir.'\\'.$files[$i];
-        // if (is_dir($file)) {
-        //     continue;
-        // }
         if (!file_exists( $file)) { 
             continue;
         }  
