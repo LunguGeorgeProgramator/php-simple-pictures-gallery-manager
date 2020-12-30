@@ -20,7 +20,7 @@ require_once('LoadFiles.class.php');
 <?php
 $loadFilesClass = new LoadFiles;
 if(isset($_GET['folder'])){
-  echo $loadFilesClass->loadGallery(null, $_GET['folder']);
+  echo $loadFilesClass->loadGallery($_GET['folder']);
 }
 ?>
 </div>
