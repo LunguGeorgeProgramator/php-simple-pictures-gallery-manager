@@ -14,7 +14,7 @@ class LoadFiles {
         return $this->directory_name . ($folder ? '\\'. rawurldecode($folder) : '');
     }
 
-    function getFilesInDirectory($folder = null){
+    function scanDirectoryForFiles($folder = null){
         $directory_name = $this->setDirectory($folder);
         $files = scandir($directory_name, 0);
         usort($files, 'strnatcasecmp');
@@ -38,9 +38,9 @@ class LoadFiles {
     }
 
 
-    function scanDirectory($search = null, $folder = null){
+    function loadGallery($search = null, $folder = null){
         echo $search ? urldecode($search) : '';
-        $files = $this->getFilesInDirectory($folder);
+        $files = $this->scanDirectoryForFiles($folder);
         $i_val = $folder ? 2 : 0;
 
         for($i = $i_val; $i < count($files); $i++){
@@ -105,7 +105,6 @@ class LoadFiles {
         if (!file_exists($file)) { 
             return $html;
         }  
-        echo 'as';
         $pict = '/xxx/'.rawurldecode($folder).'/'.$files[$i];  
         $pict = str_replace('%','%25',$pict);
         $pict = str_replace('#','%23',$pict);

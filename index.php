@@ -19,14 +19,11 @@ Search: <input type="text" name="search"><br>
 
 <?php
 $loadFilesClass = new LoadFiles;
-// $dir = 'C:\Users\George\Downloads\xxx';
-// $files = scandir($dir, 0);
-// usort($files, 'strnatcasecmp');
 
 if(isset($_GET['search'])){
-    $loadFilesClass->scanDirectory($_GET['search']);
+    $loadFilesClass->loadGallery($_GET['search']);
 } else {
-    $loadFilesClass->scanDirectory();
+    $loadFilesClass->loadGallery();
 }
     
 
