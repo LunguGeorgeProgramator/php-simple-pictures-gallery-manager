@@ -16,11 +16,7 @@ echo $loadFilesClass->paginantionPage();
 <div class="container">
   <div class="row">
 <?php
-if(isset($_GET['search'])){
-    echo $loadFilesClass->loadGallery();
-} else {
-    echo $loadFilesClass->loadGallery();
-}
+echo $loadFilesClass->loadGallery();
 ?>
   </div>
 </div>

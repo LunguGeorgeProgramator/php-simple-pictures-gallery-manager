@@ -19,9 +19,7 @@ require_once('LoadFiles.class.php');
   <div class="row zoomwall" id="zoomwall" >
 <?php
 $loadFilesClass = new LoadFiles;
-if(isset($_GET['folder'])){
-  echo $loadFilesClass->loadGallery($_GET['folder']);
-}
+echo $loadFilesClass->loadGallery($_GET['folder']);
 ?>
 </div>
 <div clss="row">
