@@ -21,13 +21,10 @@ Search: <input type="text" name="search"><br>
 $loadFilesClass = new LoadFiles;
 
 if(isset($_GET['search'])){
-    $loadFilesClass->loadGallery($_GET['search']);
+    echo $loadFilesClass->loadGallery($_GET['search']);
 } else {
-    $loadFilesClass->loadGallery();
+    echo $loadFilesClass->loadGallery();
 }
-    
-
-// $results = array_search("red",$a);
 ?>
   </div>
 </div>

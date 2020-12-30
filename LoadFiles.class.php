@@ -1,8 +1,8 @@
 <?php
+require_once('globals.class.php');
 
 class LoadFiles {
 
-    private $default_directory = 'C:\Users\George\Downloads\xxx';
     public $directory_name;
 
     function __construct($directory_name = null) {
@@ -10,7 +10,7 @@ class LoadFiles {
     }
 
     function setDirectory($folder = null){
-        $this->directory_name = $directory_name ?? $this->default_directory;
+        $this->directory_name = $this->directory_name ?? Globals::DEFAULT_DIRECTORY;
         return $this->directory_name . ($folder ? '\\'. rawurldecode($folder) : '');
     }
 
@@ -39,7 +39,7 @@ class LoadFiles {
 
 
     function loadGallery($search = null, $folder = null){
-        echo $search ? urldecode($search) : '';
+        $html = $search ? urldecode($search) : '';
         $files = $this->scanDirectoryForFiles($folder);
         $i_val = $folder ? 2 : 0;
 
@@ -62,11 +62,9 @@ class LoadFiles {
             if(empty($content_page)){
                 continue;
             }
-            echo $content_page;
-            if($i === 20){
-                break;
-            }
+            $html .= $content_page;
         }
+        return $html;
     }
 
     function mainIndexPage($new_dir, $files, $i){
@@ -82,11 +80,11 @@ class LoadFiles {
                 if (file_exists( $new_dir.'\\'.$filesNew[2])) {
                     $httml .= '<div class="col">';
                     $filename = $new_dir.'\\'.$filesNew[2]; 
-                    $pict = '/xxx/'.$files[$i].'/'.$filesNew[2];
+                    $pict = '/'. array_reverse(explode('\\', $new_dir))[1].'/'.$files[$i].'/'.$filesNew[2];
                     $pict = str_replace('%','%25',$pict);
                     $pict = str_replace('#','%23',$pict);
                     $name = rawurlencode(str_replace('&', '%26', $files[$i]));
-                    $httml .= '<a target="_blank" href="/php-simple-pictures-gallery-manager/view.php?folder='. $name.'"><img src="'.$pict.'" alt="Smiley face" width="250"></ass><br>';
+                    $httml .= '<a target="_blank" href="/'.Globals::POJECT_DIR.'/view.php?folder='. $name.'"><img src="'.$pict.'" alt="Smiley face" width="250"></ass><br>';
                     $httml .= "<b style='height: 100px; overflow: hidden;'>".$files[$i]."</b>";
                     $httml .= '</div>';
                 } else {
@@ -101,11 +99,10 @@ class LoadFiles {
 
     function viewPage($file, $files, $i, $folder){
         $html = '';
-        echo $file;
         if (!file_exists($file)) { 
             return $html;
         }  
-        $pict = '/xxx/'.rawurldecode($folder).'/'.$files[$i];  
+        $pict = '/'. array_reverse(explode('\\', $file))[2].'/'.rawurldecode($folder).'/'.$files[$i];  
         $pict = str_replace('%','%25',$pict);
         $pict = str_replace('#','%23',$pict);
         $html .= '<img class="col" src="'.$pict.'"  data-highres="'.$pict.'" width="250" alt="Smiley face" >';

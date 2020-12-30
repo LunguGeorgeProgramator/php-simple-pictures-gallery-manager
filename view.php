@@ -52,7 +52,7 @@ require_once('LoadFiles.class.php');
 $loadFilesClass = new LoadFiles;
 
 if(isset($_GET['folder'])){
-    $loadFilesClass->loadGallery(null, $_GET['folder']);
+  echo $loadFilesClass->loadGallery(null, $_GET['folder']);
 }
 ?>
 </div>
