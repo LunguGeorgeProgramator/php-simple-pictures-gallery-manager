@@ -1,6 +1,6 @@
 
-<link rel="stylesheet" href="css/zzzz.css">
-<script type="text/javascript" src="js/zzz.js"></script>
+<link rel="stylesheet" href="css/zoomwall.css">
+<script type="text/javascript" src="js/zoomwall.js"></script>
 <style>
 html,
 body {
