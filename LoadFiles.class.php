@@ -1,5 +1,4 @@
 <?php
-require_once('globals.class.php');
 
 class LoadFiles {
 
@@ -37,12 +36,10 @@ class LoadFiles {
         return true;
     }
 
-
     function loadGallery($search = null, $folder = null){
         $html = $search ? urldecode($search) : '';
         $files = $this->scanDirectoryForFiles($folder);
         $i_val = $folder ? 2 : 0;
-
         for($i = $i_val; $i < count($files); $i++){
             if($files[$i]  == "." || $files[$i]  == "..") {
                 continue;
@@ -50,15 +47,12 @@ class LoadFiles {
             if($search !== null && $this->searchInDirectory($search, $files, $i) === true){
                 continue;
             }
-           
             $new_dir = $this->setDirectory($folder).'\\'.$files[$i];
-
             if($folder === null) {
                 $content_page = $this->mainIndexPage($new_dir, $files, $i);
             }else {
                 $content_page = $this->viewPage($new_dir, $files, $i, $folder);
             }
-            
             if(empty($content_page)){
                 continue;
             }
@@ -81,8 +75,7 @@ class LoadFiles {
                     $httml .= '<div class="col">';
                     $filename = $new_dir.'\\'.$filesNew[2]; 
                     $pict = '/'. array_reverse(explode('\\', $new_dir))[1].'/'.$files[$i].'/'.$filesNew[2];
-                    $pict = str_replace('%','%25',$pict);
-                    $pict = str_replace('#','%23',$pict);
+                    $pict = $this->replaceString($pict);
                     $name = rawurlencode(str_replace('&', '%26', $files[$i]));
                     $httml .= '<a target="_blank" href="/'.Globals::POJECT_DIR.'/view.php?folder='. $name.'"><img src="'.$pict.'" alt="Smiley face" width="250"></ass><br>';
                     $httml .= "<b style='height: 100px; overflow: hidden;'>".$files[$i]."</b>";
@@ -103,14 +96,16 @@ class LoadFiles {
             return $html;
         }  
         $pict = '/'. array_reverse(explode('\\', $file))[2].'/'.rawurldecode($folder).'/'.$files[$i];  
-        $pict = str_replace('%','%25',$pict);
-        $pict = str_replace('#','%23',$pict);
+        $pict = $this->replaceString($pict);
         $html .= '<img class="col" src="'.$pict.'"  data-highres="'.$pict.'" width="250" alt="Smiley face" >';
         return $html;
     }
 
+    function replaceString($str){
+        $str = str_replace('%','%25', $str);
+        $str = str_replace('#','%23', $str);
+        return $str;
+    }
+
 }
-
-
-
 ?>
