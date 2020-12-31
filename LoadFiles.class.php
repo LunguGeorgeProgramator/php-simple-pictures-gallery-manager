@@ -24,8 +24,8 @@ class LoadFiles {
 
     function scanDirectoryForFiles(){
         $directory_name = $this->setDirectory($this->folder);
-        $files = array_diff(scandir($directory_name . '/'), array(".", ".."));
-        echo count($files);
+        $files = array_diff(scandir($directory_name . '/', 1), array(".", ".."));
+        // echo count($files);
         usort($files, 'strnatcasecmp');
         return $files;
     }

@@ -1,7 +1,9 @@
 
+<!-- <link rel="stylesheet" href="css/bootstrap.min.css"> -->
+<!-- <link rel="stylesheet" href="css/jquery.ui.min.css"> -->
+<link rel="stylesheet" href="css/custom.css">
 <link rel="stylesheet" href="css/zoomwall.css">
 <script type="text/javascript" src="js/zoomwall.js"></script>
-<link rel="stylesheet" href="css/custom.css">
 <script>
 	window.onload = function() {
 		zoomwall.create(document.getElementById('zoomwall'), true);

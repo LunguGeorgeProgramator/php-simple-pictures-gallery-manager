@@ -5,22 +5,32 @@ body {
   padding: 0;
 }
 
-body { background-color: black; }
+.ex2 {
+  height: 388px;
+  overflow: hidden;
+}
+
+.ex3 {
+  height: 50px;
+  overflow: hidden;
+}
+
+/* body { background-color: black; } */
 
 header {
   padding: 1em;
   background-color: #333;
   text-align: center;
 }
-h1 { color:#fff;}
+/* h1 { color:#fff;} */
 a:link,
 a:visited {
   text-decoration: none;
   font-family: sans-serif;
-  color: white;
+  /* color: white; */
 }
 
-a:hover { color: #ddd; }
+/* a:hover { color: #ddd; } */
 
 #author { float: left; }
 

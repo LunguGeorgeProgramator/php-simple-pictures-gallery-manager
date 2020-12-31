@@ -13,13 +13,17 @@ trait PagesContent {
                     $filesNew[2] = $filesNew[0];
                 }
                 if (file_exists( $new_dir.'\\'.$filesNew[2])) {
-                    $httml .= '<div class="col">';
                     $filename = $new_dir.'\\'.$filesNew[2]; 
                     $pict = '/'. array_reverse(explode('\\', $new_dir))[1].'/'.$files[$i].'/'.$filesNew[2];
                     $pict = $this->replaceString($pict);
                     $name = rawurlencode(str_replace('&', '%26', $files[$i]));
-                    $httml .= '<a target="_blank" href="/'.Globals::POJECT_DIR.'/view.php?folder='. $name.'"><img src="'.$pict.'" alt="Smiley face" width="250"></ass><br>';
-                    $httml .= "<b style='height: 100px; overflow: hidden;'>".$files[$i]."</b>";
+                    $httml .= '<div class="col-3">';
+                        $httml .= '<div class="ex2">';
+                            $httml .= '<a target="_blank" href="/'.Globals::POJECT_DIR.'/view.php?folder='. $name.'"><img src="'.$pict.'" alt="Smiley face" width="250"></ass><br>';
+                        $httml .= '</div>';
+                        $httml .= '<div class="ex3">';
+                            $httml .= "<b style='height: 100px; overflow: hidden;'>".$files[$i]."</b>";
+                        $httml .= '</div>';
                     $httml .= '</div>';
                 } else {
                     return $httml;
@@ -43,12 +47,12 @@ trait PagesContent {
     }
 
     function paginantionPage($folder = null){
-        $html = '<div class="container">';
-        $html .= '<div class="row">';
-        $html .= '<div class="col"><a href="'.$this->setPaginationUrl().$this->pagination->getPrev().'">< prev</a></div>';
-        $html .= '<div class="col"><a href="'.$this->setPaginationUrl().$this->pagination->getNext().'"> next ></a></div>';
-        $html .= '</div>';
-        $html .= '</div>';
+        $html = '<nav aria-label="...">';
+        $html .= '<ul class="pagination">';
+        $html .= '<li class="page-item"><a class="page-link" href="'.$this->setPaginationUrl().$this->pagination->getPrev().'">Previous</a></li>';
+        $html .= '<li class="page-item"><a class="page-link" href="'.$this->setPaginationUrl().$this->pagination->getNext().'"> Next</a></li>';
+        $html .= '</nav>';
+        $html .= '</ul>';
         return $html;
     }
 
