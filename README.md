@@ -1,1 +1,3 @@
-I created this scrip to display in a gallery way all my folders with pictures on my computer. With out using a DB.
+This site is used for managing image gallery folders and files if is needed, in any place on a server if the permissions are set to read on them.
+
+It is using php 7 and zoomgallery js.
